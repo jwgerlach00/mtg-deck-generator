@@ -178,6 +178,38 @@ public class Card {
         return targetColorIdentity.containsAll(this.colorIdentity);
     }
 
+    public Map<String, Integer> getManaCount() {
+        if (manaCost == null) {
+            return null;
+        }
+
+        Map<String, Integer> manaCount = new HashMap<>();
+
+        int i = 0;
+        while (i < manaCost.length()) {
+            if (manaCost.charAt(i) == '{') {
+                int closingBracket = manaCost.indexOf('}', i);
+                if (closingBracket != -1) {
+                    String symbol = manaCost.substring(i + 1, closingBracket);
+
+                    if (symbol.matches("\\d+")) {
+                        // If it's a numeric value, treat it as generic mana
+                        int genericMana = Integer.parseInt(symbol);
+                        manaCount.put("generic", manaCount.getOrDefault("generic", 0) + genericMana);
+                    } else {
+                        // Otherwise, treat it as a specific symbol
+                        manaCount.put(symbol, manaCount.getOrDefault(symbol, 0) + 1);
+                    }
+
+                    i = closingBracket;
+                }
+            }
+            i++;
+        }
+
+        return manaCount;
+    }
+
     // Loading JSON into the Card class
     public static Card loadFromJson(JsonNode cardJsonNode) {
         try {

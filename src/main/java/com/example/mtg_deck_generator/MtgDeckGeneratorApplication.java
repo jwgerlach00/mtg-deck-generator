@@ -10,10 +10,10 @@ import java.util.Set;
 @SpringBootApplication
 public class MtgDeckGeneratorApplication implements CommandLineRunner {
 
-	private CardService service;
+	private final CardService cardService;
 
-	public MtgDeckGeneratorApplication(CardService service) {
-		this.service = service;
+	public MtgDeckGeneratorApplication(CardService cardService) {
+		this.cardService = cardService;
 	}
 
 	public static void main(String[] args) {
@@ -27,13 +27,15 @@ public class MtgDeckGeneratorApplication implements CommandLineRunner {
 
 //		System.out.println(service.findByName("Abhorrent Oculus").getCardId());
 //		service.deleteAll();
-		List<Card> cards = service.findAll();
+		List<Card> cards = cardService.findAll();
 
 		System.out.printf("Number of standard legal cards: %s%n", cards.size());
 
-		Set<Character> s1 = Set.of('U', 'B');
+		DeckGenerator deckGenerator = new DeckGenerator(cardService);
 
-		System.out.println(service.findAllByColorIdentitySubset(s1).size());
+		for (int i = 0; i < 5; i++) {
+			deckGenerator.generateRandomDeck();
+		}
 
 //		Card c1 = service.findByCardId("673260913e514f54cb482be8");
 

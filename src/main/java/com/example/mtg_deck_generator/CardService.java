@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Filter;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,10 +54,7 @@ public class CardService {
 
     public List<Card> findAllByColorIdentitySubset(Set<Character> colorIdentitySuperset) {
         List<Card> allCards = repository.findAll();
-
-        return allCards.stream()
-                .filter(card -> card.inColorIdentity(colorIdentitySuperset))
-                .collect(Collectors.toList());
+        return Filters.colorIdentitySubset(allCards, colorIdentitySuperset);
     }
 }
 

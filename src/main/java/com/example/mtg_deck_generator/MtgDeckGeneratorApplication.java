@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
-import java.util.Set;
 
 @SpringBootApplication
 public class MtgDeckGeneratorApplication implements CommandLineRunner {
@@ -23,18 +22,16 @@ public class MtgDeckGeneratorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		service.loadAllStandardLegalCards();
+//		cardService.loadAllStandardLegalCards();
+//		cardService.deleteAll();
 
-//		System.out.println(service.findByName("Abhorrent Oculus").getCardId());
-//		service.deleteAll();
 		List<Card> cards = cardService.findAll();
-
 		System.out.printf("Number of standard legal cards: %s%n", cards.size());
-
 		DeckGenerator deckGenerator = new DeckGenerator(cardService);
-
-		for (int i = 0; i < 5; i++) {
-			deckGenerator.generateRandomDeck();
+		for (int i = 0; i < 10; i++) {
+			Deck deck = deckGenerator.generateRandomDeck(2, 2);
+			deck.setName("deck-%s".formatted(i));
+			deck.writeToFile(System.getenv("WRITE_DIRECTORY"));
 		}
 
 //		Card c1 = service.findByCardId("673260913e514f54cb482be8");

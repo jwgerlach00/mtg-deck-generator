@@ -27,11 +27,11 @@ public class DeckGenerator {
         random = new Random(1);
     }
 
-    public List<Card> generateRandomDeck() {
+    public Deck generateRandomDeck() {
         return generateRandomDeck(1, BASIC_MANA_SYMBOLS.length);
     }
 
-    public List<Card> generateRandomDeck(int minColors, int maxColors) {
+    public Deck generateRandomDeck(int minColors, int maxColors) {
         if (minColors < 0 || maxColors < minColors || maxColors > BASIC_MANA_SYMBOLS.length) {
             throw new IllegalArgumentException("Invalid bounds for colors");
         }
@@ -64,32 +64,33 @@ public class DeckGenerator {
 
         log.info("Generating deck with color identity: {} and mana curve: {}", colorSet, manaCurveTemplate);
 
-        return generateDeck(cardsInColors, manaCurveTemplate);
+        return generateSampledDeck(cardsInColors, colorSet, manaCurveTemplate);
     }
 
 
-    public List<Card> generateDeck(List<Card> cards, ManaCurveTemplate manaCurveTemplate) {
+    private Deck generateSampledDeck(List<Card> cardPool, Set<Character> colorSet, ManaCurveTemplate manaCurveTemplate) {
         Map<BigDecimal, Integer> manaCurve = manaCurveTemplate.getManaCurve();
 
-        List<Card> deck = new ArrayList<>();
+        Deck deck = new Deck(colorSet);
 
-        addNonLandsToDeck(cards, deck, manaCurve);
+        sampleAndAddCardsToDeck(cardPool, deck, manaCurve);
 
         int numLands = DECK_SIZE - deck.size();
         addLandsToDeck(deck, numLands);
 
         if (deck.size() != DECK_SIZE) {
-            throw new RuntimeException("Deck with size: " + deck.size() + " generated instead of size: " + DECK_SIZE);
+            throw new RuntimeException("Deck with size: %s generated instead of size: %s"
+                    .formatted(deck.size(), DECK_SIZE));
         }
 
         return deck;
     }
 
-    private void addNonLandsToDeck(List<Card> cards, List<Card> deck, Map<BigDecimal, Integer> manaCurve) {
+    private void sampleAndAddCardsToDeck(List<Card> cardPool, Deck deck, Map<BigDecimal, Integer> manaCurve) {
         for (BigDecimal cmc : manaCurve.keySet()) {
             // Get all cards that align with the cmc
             int num = manaCurve.get(cmc);
-            List<Card> cmcCards = Filters.convertedManaCost(cards, cmc);
+            List<Card> cmcCards = Filters.convertedManaCost(cardPool, cmc);
 
             // Add random card that aligns with the cmc
             while (num > 0) {
@@ -100,7 +101,7 @@ public class DeckGenerator {
         }
     }
 
-    private void addLandsToDeck(List<Card> deck, int numLands) {
+    private void addLandsToDeck(Deck deck, int numLands) {
         Map<Character, Integer> manaDist = getManaColorDist(deck);
         // Color identity: [R, B, U, G, W]; Mana distribution: {B=10, R=8, U=6, G=9, W=9}  // this one failed due to Unexpected number of lands
 //        manaDist = Map.of('B', 5, 'R', 3, 'W', 1);  // for this example use 5 for numLands
@@ -156,10 +157,10 @@ public class DeckGenerator {
         return landDist;
     }
 
-    private static Map<Character, Integer> getManaColorDist(List<Card> cards) {
+    private static Map<Character, Integer> getManaColorDist(Deck deck) {
         Map<Character, Integer> manaDist = new HashMap<>();
 
-        for (Card card : cards) {
+        for (Card card : deck) {
             Map<String, Integer> manaCount = card.getManaCount();
             if (manaCount == null) continue;
             for (Map.Entry<String, Integer> entry : manaCount.entrySet()) {

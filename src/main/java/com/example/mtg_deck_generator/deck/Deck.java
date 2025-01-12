@@ -1,5 +1,6 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.deck;
 
+import com.example.mtg_deck_generator.card.Card;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

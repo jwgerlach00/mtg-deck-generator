@@ -1,5 +1,9 @@
 package com.example.mtg_deck_generator;
 
+import com.example.mtg_deck_generator.card.Card;
+import com.example.mtg_deck_generator.card.CardService;
+import com.example.mtg_deck_generator.deck.Deck;
+import com.example.mtg_deck_generator.deck.DeckGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

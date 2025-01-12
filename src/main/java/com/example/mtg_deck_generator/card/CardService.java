@@ -1,12 +1,12 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.card;
 
+import com.example.mtg_deck_generator.Filters;
+import com.example.mtg_deck_generator.api.ScryfallApiClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Filter;
-import java.util.stream.Collectors;
 
 @Service
 public class CardService {

@@ -1,5 +1,6 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.card;
 
+import com.example.mtg_deck_generator.api.ScryfallApiClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Iterator;
 import java.util.NoSuchElementException;

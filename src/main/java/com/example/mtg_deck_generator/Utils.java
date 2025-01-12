@@ -1,5 +1,7 @@
 package com.example.mtg_deck_generator;
 
+import com.example.mtg_deck_generator.card.Card;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.card;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

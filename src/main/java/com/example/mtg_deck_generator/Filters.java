@@ -1,8 +1,9 @@
 package com.example.mtg_deck_generator;
 
+import com.example.mtg_deck_generator.card.Card;
+
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 

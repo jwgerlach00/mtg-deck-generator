@@ -1,5 +1,8 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.deck;
 
+import com.example.mtg_deck_generator.Filters;
+import com.example.mtg_deck_generator.card.Card;
+import com.example.mtg_deck_generator.card.CardService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -175,42 +178,6 @@ public class DeckGenerator {
             }
         }
         return manaDist;
-    }
-
-    public enum ManaCurveTemplate {
-        AGGRO(new HashMap<>() {{
-            put(BigDecimal.valueOf(1.0), 8);
-            put(BigDecimal.valueOf(2.0), 10);
-            put(BigDecimal.valueOf(3.0), 8);
-            put(BigDecimal.valueOf(4.0), 4);
-            put(BigDecimal.valueOf(5.0), 2);  // 5+ mana cards
-        }}),
-        CONTROL(new HashMap<>() {{
-            put(BigDecimal.valueOf(1.0), 2);
-            put(BigDecimal.valueOf(2.0), 4);
-            put(BigDecimal.valueOf(3.0), 6);
-            put(BigDecimal.valueOf(4.0), 10);
-            put(BigDecimal.valueOf(5.0), 8);  // 5+ mana cards
-        }}),
-        MIDRANGE(new HashMap<>() {{
-            put(BigDecimal.valueOf(1.0), 4);
-            put(BigDecimal.valueOf(2.0), 6);
-            put(BigDecimal.valueOf(3.0), 10);
-            put(BigDecimal.valueOf(4.0), 6);
-            put(BigDecimal.valueOf(5.0), 4);  // 5+ mana cards
-        }});
-
-        private final Map<BigDecimal, Integer> manaCurve;
-
-        // Constructor to set the mana curve map for each deck type
-        ManaCurveTemplate(Map<BigDecimal, Integer> manaCurve) {
-            this.manaCurve = manaCurve;
-        }
-
-        // Getter for the mana curve map
-        public Map<BigDecimal, Integer> getManaCurve() {
-            return manaCurve;
-        }
     }
 
 }

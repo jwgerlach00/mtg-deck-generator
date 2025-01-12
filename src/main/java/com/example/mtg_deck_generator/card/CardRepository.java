@@ -1,4 +1,4 @@
-package com.example.mtg_deck_generator;
+package com.example.mtg_deck_generator.card;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -9,9 +9,9 @@ import java.util.UUID;
 @Repository
 public interface CardRepository extends MongoRepository<Card, String> {
 
-    public Card findByCardId(String cardId);
+    Card findByCardId(String cardId);
 
-    public Card findByScryfallId(UUID scryfallId);
+    Card findByScryfallId(UUID scryfallId);
 
-    public List<Card> findAllByName(String name);
+    List<Card> findAllByName(String name);
 }

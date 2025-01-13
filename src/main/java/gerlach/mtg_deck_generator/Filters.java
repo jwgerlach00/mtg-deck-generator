@@ -1,6 +1,6 @@
-package com.example.mtg_deck_generator;
+package gerlach.mtg_deck_generator;
 
-import com.example.mtg_deck_generator.card.Card;
+import gerlach.mtg_deck_generator.card.Card;
 
 import java.math.BigDecimal;
 import java.util.List;

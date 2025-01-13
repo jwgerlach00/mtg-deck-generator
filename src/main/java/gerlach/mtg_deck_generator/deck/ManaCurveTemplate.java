@@ -1,4 +1,4 @@
-package com.example.mtg_deck_generator.deck;
+package gerlach.mtg_deck_generator.deck;
 
 import lombok.Getter;
 

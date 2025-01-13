@@ -1,4 +1,4 @@
-package com.example.mtg_deck_generator.card;
+package gerlach.mtg_deck_generator.card;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

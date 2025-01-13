@@ -1,8 +1,8 @@
-package com.example.mtg_deck_generator.deck;
+package gerlach.mtg_deck_generator.deck;
 
-import com.example.mtg_deck_generator.Filters;
-import com.example.mtg_deck_generator.card.Card;
-import com.example.mtg_deck_generator.card.CardService;
+import gerlach.mtg_deck_generator.Filters;
+import gerlach.mtg_deck_generator.card.Card;
+import gerlach.mtg_deck_generator.card.CardService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;

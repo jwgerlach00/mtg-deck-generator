@@ -1,7 +1,7 @@
-package com.example.mtg_deck_generator.card;
+package gerlach.mtg_deck_generator.card;
 
-import com.example.mtg_deck_generator.Filters;
-import com.example.mtg_deck_generator.api.ScryfallApiClient;
+import gerlach.mtg_deck_generator.Filters;
+import gerlach.mtg_deck_generator.api.ScryfallApiClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

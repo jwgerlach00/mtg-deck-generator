@@ -2,6 +2,7 @@ package gerlach.mtg_deck_generator.card;
 
 import gerlach.mtg_deck_generator.Filters;
 import gerlach.mtg_deck_generator.api.ScryfallApiClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class CardService {
 
     private final CardRepository repository;
@@ -21,6 +23,7 @@ public class CardService {
     }
 
     public void loadAllStandardLegalCards() {
+        log.info("Loading all standard legal cards...");
         ScryfallApiClient apiClient = new ScryfallApiClient((apiStem + "cards/search?q=legal:standard"));
         CardIterator cardIterator = new CardIterator(apiClient);
 
@@ -28,6 +31,11 @@ public class CardService {
             Card card = cardIterator.next();
             repository.save(card);
         }
+    }
+
+    public void deleteAll() {
+        log.info("Deleting all DB content...");
+        repository.deleteAll();
     }
 
     public List<Card> findAll() {
@@ -56,5 +64,6 @@ public class CardService {
         List<Card> allCards = repository.findAll();
         return Filters.colorIdentitySubset(allCards, colorIdentitySuperset);
     }
+
 }
 

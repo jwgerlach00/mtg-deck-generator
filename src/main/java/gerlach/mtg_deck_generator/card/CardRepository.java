@@ -14,4 +14,7 @@ public interface CardRepository extends MongoRepository<Card, String> {
     Card findByScryfallId(UUID scryfallId);
 
     List<Card> findAllByName(String name);
+
+    void deleteAll();
+
 }

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "mtg-deck-generator"
+  data:
+    mongodb:
+      uri: "mongodb://root:example@localhost:27017/admin"
+
+server:
+  port: 8083
+
+scryfall:
+  api:
+    stem: "https://api.scryfall.com/"
+
+db:
+  initialize: false
